@@ -15,7 +15,7 @@ standard_version() {
 
     if [[ "$bullet" -eq 6 ]]; then
         echo "💥 BOOM! You lost!"
-        echo "Since its safe-mode, i would not do anything"
+        echo "Since it's safe-mode, I would not do anything."
     else
         echo "🎉 You survived! The script is self-destructing..."
         rm -- "$0"  # Self-destructs the script (harmless, deletes only the script itself)
@@ -60,13 +60,23 @@ get_input() {
 
     # Display the menu
     while true; do
-        echo -e "\n[${options[0]}]  [${options[1]}]"
-        echo -e "Your current selection: ${options[$selection]}"
+        # Clear the screen and display the menu options
+        clear
+
+        # Highlight the selected option
+        for i in "${!options[@]}"; do
+            if [[ $i -eq $selection ]]; then
+                echo -e "\033[1;32m[${options[$i]}]\033[0m"  # Highlight selected option in green
+            else
+                echo -e "[${options[$i]}]"
+            fi
+        done
 
         # Read key press
         read -n 1 -s key
 
-        if [[ "$key" == $'\x1b' ]]; then  # Arrow key detection
+        # Arrow key detection (left and right)
+        if [[ "$key" == $'\x1b' ]]; then  # Arrow key sequence starts with ESC
             read -n 2 -s -t 0.1 key
             if [[ "$key" == "[C" ]]; then  # Right arrow
                 if [[ $selection -lt 1 ]]; then
@@ -77,7 +87,7 @@ get_input() {
                     ((selection--))
                 fi
             fi
-        elif [[ "$key" == $'\x0a' ]]; then  # Enter key to confirm
+        elif [[ "$key" == "" ]]; then  # Enter key to confirm selection
             break
         fi
     done
