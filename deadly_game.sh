@@ -18,7 +18,6 @@ standard_version() {
         echo "Since it's safe-mode, I would not do anything."
     else
         echo "🎉 You survived! The script is self-destructing..."
-        rm -- "$0"  # Self-destructs the script (harmless, deletes only the script itself)
     fi
 }
 
