@@ -17,7 +17,7 @@ standard_version() {
         echo "💥 BOOM! You lost!"
         echo "Since it's safe-mode, I would not do anything."
     else
-        echo "🎉 You survived! The script is self-destructing..."
+        echo "🎉 You survived! The script is self-destructing(no)..."
     fi
 }
 
